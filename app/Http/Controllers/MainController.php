@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helper\RESTApi;
 use App\Http\Filter\Filter;
 use App\Http\Filter\QueryFilter;
 use Illuminate\Support\Facades\Http;
 
 class MainController extends Controller
 {
+    use RESTApi;
     protected $filter;
 
     public function __construct(Filter $filter)
@@ -19,9 +21,9 @@ class MainController extends Controller
     {
         try{
         $response = Http::get(config('services.filter.base_url').''.$this->make($this->filter));
-        return response()->json(['data'=>$response->json()]);
+        return $this->sendJson($response->json());
         }catch (\Exception $e){
-            return response()->json(['error'=>$e->getMessage()]);
+            return $this->sendError($e->getMessage());
         }
     }
 
