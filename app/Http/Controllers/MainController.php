@@ -17,8 +17,12 @@ class MainController extends Controller
 
     public function index()
     {
+        try{
         $response = Http::get(config('services.filter.base_url').''.$this->make($this->filter));
         return response()->json(['data'=>$response->json()]);
+        }catch (\Exception $e){
+            return response()->json(['error'=>$e->getMessage()]);
+        }
     }
 
     public function make(QueryFilter $filter)
