@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Filter\Filter;
 use App\Http\Filter\QueryFilter;
-use App\Http\Requests\FilterRequest;
 use Illuminate\Support\Facades\Http;
 
 class MainController extends Controller
